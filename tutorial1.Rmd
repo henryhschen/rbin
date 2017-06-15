@@ -6,7 +6,23 @@ output:
   html_document:
     toc: yes
     number_section: yes
+runtime: shiny
 ---
+
+```{r set-global-options, echo = FALSE}
+knitr::opts_chunk$set(eval = TRUE,
+                      echo = TRUE,
+                      cache = FALSE,
+                      include = TRUE,
+                      collapse = FALSE,
+                      dependson = NULL,
+                      engine = "R", # Chunks will always have R code, unless noted
+                      error = TRUE,
+                      fig.path="Figures/",  # Set the figure options
+                      fig.align = "center",
+                      fig.width = 7,
+                      fig.height = 7)
+```
 
 ```{r importing packages}
 library(ggplot2)
@@ -16,4 +32,42 @@ library(ggplot2)
 print(123)
 ```
 
+# Diffent types of word
+Hello! **Hello!** __Hello!!__
 
+YAS!!!^!!!^
+
+# Link website
+[Clck Here](https://www.rstudio.com)
+
+
+# Program w/ normal
+```{r}
+mean(mtcars$mpg)
+```
+
+# Program w/ asis and collapse
+```{r results="asis", collapse=TRUE}
+mean(mtcars$mpg)
+```
+
+# Load Users' wish list
+```{r, echo = FALSE}
+numericInput("rows", "How many cars?", 5)
+
+renderTable({
+  head(cars, input$rows)
+})
+```
+
+# Perform ktable
+```{r load ktable}
+library(knitr)
+kable(head(cars, n=5))
+```
+
+# Perform datatable
+```{r load datatable}
+library(DT)
+datatable(head(mtcars, n=nrow(mtcars)), options=list(pageLength=5))
+```
