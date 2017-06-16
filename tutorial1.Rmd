@@ -71,3 +71,14 @@ kable(head(cars, n=5))
 library(DT)
 datatable(head(mtcars, n=nrow(mtcars)), options=list(pageLength=5))
 ```
+
+# Import data from MySQL
+```{r import data}
+library(RMySQL)
+library(dbConnect)
+con = dbConnect(MySQL(), user="tool830", password="123", dbname="test", host="localhost")
+dbListTables(con)
+myQuery <- "select * from trains"
+df <- dbGetQuery(con, myQuery)
+df
+```
